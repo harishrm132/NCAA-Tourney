@@ -8,10 +8,29 @@ namespace TrackerLibrary
 {
     public class TournamentModel
     {
+        /// <summary>
+        /// Represents the name of tournament
+        /// </summary>
         public string TournamentName { get; set; }
+
+        /// <summary>
+        /// Represents the entry fee for tournament
+        /// </summary>
         public decimal EntryFee { get; set; }
+
+        /// <summary>
+        /// Represents the list of teams enterd for the tournement
+        /// </summary>
         public List<TeamModel> EnteredTeams { get; set; } = new List<TeamModel>();
+
+        /// <summary>
+        /// Represents the price for the place hoders
+        /// </summary>
         public List<PriceModel> Prices { get; set; } = new List<PriceModel>();
+
+        /// <summary>
+        /// Represents list of rounds in which the tournament is countucted
+        /// </summary>
         public List<List<MatchupModel>> Rounds { get; set; } = new List<List<MatchupModel>>();
     }
 }
