@@ -1,7 +1,4 @@
 
-.vs/NCAA Tourney/v16/.suo
-*.cache
-*.cache
 
 # Build results
 [Dd]ebug/
@@ -16,6 +13,11 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+
+.vs/NCAA Tourney/v16/.suo
+*.cache
+*.cache
+
 
 # Files built by Visual Studio
 *_i.c
