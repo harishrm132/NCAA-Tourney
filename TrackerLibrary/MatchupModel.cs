@@ -9,12 +9,12 @@ namespace TrackerLibrary
     public class MatchupModel
     {
         /// <summary>
-        /// Contains List of match entries in Current round
+        /// Contains set of team involved match 
         /// </summary>
         public List<MatchupEntryModel> Entries { get; set; } = new List<MatchupEntryModel>();
 
         /// <summary>
-        /// Represents the winner of Matchup
+        /// Represents the winner of Match
         /// </summary>
         public TeamModel Winner { get; set; }
 
