@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackerLibrary", "TrackerLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackerUI", "TrackerUI\TrackerUI.csproj", "{F1C74998-13E6-416B-BBAE-9F3DFAC676D2}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TrackerData", "C:\Users\haris\Documents\GitHub\TournamentTracker\TrackerData\TrackerData.sqlproj", "{7B36DBBF-2639-4D62-B9C3-00B5C7877D0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,12 @@ Global
 		{F1C74998-13E6-416B-BBAE-9F3DFAC676D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1C74998-13E6-416B-BBAE-9F3DFAC676D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1C74998-13E6-416B-BBAE-9F3DFAC676D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B36DBBF-2639-4D62-B9C3-00B5C7877D0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B36DBBF-2639-4D62-B9C3-00B5C7877D0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B36DBBF-2639-4D62-B9C3-00B5C7877D0C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7B36DBBF-2639-4D62-B9C3-00B5C7877D0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B36DBBF-2639-4D62-B9C3-00B5C7877D0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B36DBBF-2639-4D62-B9C3-00B5C7877D0C}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
