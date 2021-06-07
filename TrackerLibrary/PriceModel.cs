@@ -9,6 +9,11 @@ namespace TrackerLibrary
     public class PriceModel
     {
         /// <summary>
+        /// The unique Indentifier for prize
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
         /// Represents place in the tournament 
         /// </summary>
         public int PlaceNumber { get; set; }
@@ -27,5 +32,18 @@ namespace TrackerLibrary
         /// Represents percentage of amount for the place
         /// </summary>
         public double PricePercentage { get; set; }
+
+        public PriceModel()
+        {
+
+        }
+
+        public PriceModel(string placename, string placeno, string prizeamount, string prizepercentage)
+        {
+            PlaceName = placename;
+            PlaceNumber = int.Parse(placeno);
+            PriceAmount = decimal.Parse(prizeamount);
+            PricePercentage = double.Parse(prizepercentage);
+        }
     }
 }
