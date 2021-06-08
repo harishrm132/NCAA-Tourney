@@ -50,3 +50,6 @@ bld/
 *.cache
 /packages/Dapper.2.0.90
 TrackerLibrary/obj/Debug
+*.cache
+TrackerLibrary/obj/Debug/TrackerLibrary.csprojAssemblyReference.cache
+TrackerLibrary/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
