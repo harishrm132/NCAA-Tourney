@@ -47,3 +47,6 @@ bld/
 *.pidb
 *.svclog
 *.scc
+*.cache
+/packages/Dapper.2.0.90
+TrackerLibrary/obj/Debug
