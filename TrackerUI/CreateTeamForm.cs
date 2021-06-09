@@ -14,9 +14,35 @@ namespace TrackerUI
 {
     public partial class CreateTeamForm : Form
     {
+        private List<PersonModel> AvaliableTeamMembers = GlobalConfig.Connection.GetPerson_All();
+        private List<PersonModel> SelectedTeamMembers = new List<PersonModel>();
+
         public CreateTeamForm()
         {
             InitializeComponent();
+            //CreateSamaple();
+            WireUpLists();
+        }
+
+        private void CreateSamaple()
+        {
+            AvaliableTeamMembers.Add(new PersonModel { FirstName = "dasas", LastName = "sasq" });
+            AvaliableTeamMembers.Add(new PersonModel { FirstName = "asd", LastName = "wer" });
+
+            SelectedTeamMembers.Add(new PersonModel { FirstName = "Hari", LastName = "Prasa" });
+            SelectedTeamMembers.Add(new PersonModel { FirstName = "aahi", LastName = "ram" });
+        }
+
+        private void WireUpLists()
+        {
+
+            SelectTeamMemberDropDown.DataSource = null;
+            SelectTeamMemberDropDown.DataSource = AvaliableTeamMembers;
+            SelectTeamMemberDropDown.DisplayMember = "FullName";
+
+            TeamMemberslistBox.DataSource = null;
+            TeamMemberslistBox.DataSource = SelectedTeamMembers;
+            TeamMemberslistBox.DisplayMember = "FullName";
         }
 
         private void CreateMemberbutton_Click(object sender, EventArgs e)
@@ -29,7 +55,9 @@ namespace TrackerUI
                 p.EmailAdress = EmailValue.Text;
                 p.CellphoneNumber = PhoneNoValue.Text;
 
-                GlobalConfig.Connection.CreatePerson(p);
+                p = GlobalConfig.Connection.CreatePerson(p);
+                SelectedTeamMembers.Add(p);
+                WireUpLists();
 
                 FirstNameValue.Text = "";
                 LastNameValue.Text = "";
@@ -63,6 +91,30 @@ namespace TrackerUI
 
 
             return true;
+        }
+
+        private void AddMemberbutton_Click(object sender, EventArgs e)
+        {
+            PersonModel p = (PersonModel)SelectTeamMemberDropDown.SelectedItem;
+
+            if (p != null)
+            {
+                AvaliableTeamMembers.Remove(p);
+                SelectedTeamMembers.Add(p);
+                WireUpLists();
+            }
+        }
+
+        private void RemoveTeamMembersbutton_Click(object sender, EventArgs e)
+        {
+            PersonModel p = (PersonModel)TeamMemberslistBox.SelectedItem;
+
+            if(p != null)
+            {
+                SelectedTeamMembers.Remove(p);
+                AvaliableTeamMembers.Add(p);
+                WireUpLists();
+            }
         }
     }
 }

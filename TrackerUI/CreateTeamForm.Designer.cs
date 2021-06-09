@@ -47,7 +47,7 @@ namespace TrackerUI
             this.FirstNameValue = new System.Windows.Forms.TextBox();
             this.FirstNameLabel = new System.Windows.Forms.Label();
             this.TeamMemberslistBox = new System.Windows.Forms.ListBox();
-            this.DeleteTeamMembersbutton = new System.Windows.Forms.Button();
+            this.RemoveTeamMembersbutton = new System.Windows.Forms.Button();
             this.CreateTeambutton = new System.Windows.Forms.Button();
             this.AddMembergroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -116,6 +116,7 @@ namespace TrackerUI
             this.AddMemberbutton.TabIndex = 20;
             this.AddMemberbutton.Text = "Add Member";
             this.AddMemberbutton.UseVisualStyleBackColor = true;
+            this.AddMemberbutton.Click += new System.EventHandler(this.AddMemberbutton_Click);
             // 
             // AddMembergroupBox
             // 
@@ -231,20 +232,21 @@ namespace TrackerUI
             this.TeamMemberslistBox.Size = new System.Drawing.Size(341, 559);
             this.TeamMemberslistBox.TabIndex = 25;
             // 
-            // DeleteTeamMembersbutton
+            // RemoveTeamMembersbutton
             // 
-            this.DeleteTeamMembersbutton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.DeleteTeamMembersbutton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            this.DeleteTeamMembersbutton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.DeleteTeamMembersbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DeleteTeamMembersbutton.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DeleteTeamMembersbutton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.DeleteTeamMembersbutton.Location = new System.Drawing.Point(594, 619);
-            this.DeleteTeamMembersbutton.Name = "DeleteTeamMembersbutton";
-            this.DeleteTeamMembersbutton.Size = new System.Drawing.Size(112, 46);
-            this.DeleteTeamMembersbutton.TabIndex = 26;
-            this.DeleteTeamMembersbutton.Text = "Delete";
-            this.DeleteTeamMembersbutton.UseVisualStyleBackColor = true;
+            this.RemoveTeamMembersbutton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.RemoveTeamMembersbutton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.RemoveTeamMembersbutton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.RemoveTeamMembersbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RemoveTeamMembersbutton.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RemoveTeamMembersbutton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
+            this.RemoveTeamMembersbutton.Location = new System.Drawing.Point(594, 619);
+            this.RemoveTeamMembersbutton.Name = "RemoveTeamMembersbutton";
+            this.RemoveTeamMembersbutton.Size = new System.Drawing.Size(112, 46);
+            this.RemoveTeamMembersbutton.TabIndex = 26;
+            this.RemoveTeamMembersbutton.Text = "Remove";
+            this.RemoveTeamMembersbutton.UseVisualStyleBackColor = true;
+            this.RemoveTeamMembersbutton.Click += new System.EventHandler(this.RemoveTeamMembersbutton_Click);
             // 
             // CreateTeambutton
             // 
@@ -268,7 +270,7 @@ namespace TrackerUI
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(851, 760);
             this.Controls.Add(this.CreateTeambutton);
-            this.Controls.Add(this.DeleteTeamMembersbutton);
+            this.Controls.Add(this.RemoveTeamMembersbutton);
             this.Controls.Add(this.TeamMemberslistBox);
             this.Controls.Add(this.AddMembergroupBox);
             this.Controls.Add(this.AddMemberbutton);
@@ -308,7 +310,7 @@ namespace TrackerUI
         private System.Windows.Forms.Label LastNamelabel;
         private System.Windows.Forms.Button CreateMemberbutton;
         private System.Windows.Forms.ListBox TeamMemberslistBox;
-        private System.Windows.Forms.Button DeleteTeamMembersbutton;
+        private System.Windows.Forms.Button RemoveTeamMembersbutton;
         private System.Windows.Forms.Button CreateTeambutton;
     }
 }
