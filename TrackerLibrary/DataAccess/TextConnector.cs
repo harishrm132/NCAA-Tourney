@@ -12,6 +12,7 @@ namespace TrackerLibrary.DataAccess
     {
         private const string PrizesFile = "PrizeModels.csv";
         private const string PersonFile = "PersonModels.csv";
+        private const string TeamFile = "TeamModels.csv";
 
         public PersonModel CreatePerson(PersonModel model)
         {
@@ -31,7 +32,6 @@ namespace TrackerLibrary.DataAccess
             return model;
         }
 
-        //TODO - Make method actually save to the text dataase 
         public PriceModel CreatePrize(PriceModel model)
         {
             //Load the text file and Convert text to list<prize model>
@@ -47,6 +47,24 @@ namespace TrackerLibrary.DataAccess
 
             //Convert prizes to list<string> and Save list of string to text file
             prizes.SavetoPrizeFile(PrizesFile);
+
+            return model;
+        }
+
+        public TeamModel CreateTeam(TeamModel model)
+        {
+            List<TeamModel> Teams = PrizesFile.FullFilePath().LoadFile().ConverttoTeamModel(PersonFile);
+
+            //Find the Max ID 
+            int currentId = 1;
+            if (Teams.Count > 0) { currentId = Teams.OrderByDescending(x => x.Id).First().Id + 1; }
+            model.Id = currentId;
+
+            //Add new record new ID - max + 1
+            Teams.Add(model);
+
+            //Convert prizes to list<string> and Save list of string to text file
+            Teams.SavetoTeamsFile(TeamFile);
 
             return model;
         }

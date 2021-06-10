@@ -16,13 +16,11 @@ namespace TrackerLibrary
         {
             if (db == DatabaseType.SQL)
             {
-                //TODO - Set up the SQL connection properly
                 SqlConnector sql = new SqlConnector();
                 Connection = sql;
             }
             else if (db == DatabaseType.TextFiles)
             {
-                //TODO - Set up the text connection properly
                 TextConnector text = new TextConnector();
                 Connection = text;
             }
