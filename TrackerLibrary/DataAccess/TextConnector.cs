@@ -53,7 +53,7 @@ namespace TrackerLibrary.DataAccess
 
         public TeamModel CreateTeam(TeamModel model)
         {
-            List<TeamModel> Teams = PrizesFile.FullFilePath().LoadFile().ConverttoTeamModel(PersonFile);
+            List<TeamModel> Teams = TeamFile.FullFilePath().LoadFile().ConverttoTeamModel(PersonFile);
 
             //Find the Max ID 
             int currentId = 1;
@@ -72,6 +72,11 @@ namespace TrackerLibrary.DataAccess
         public List<PersonModel> GetPerson_All()
         {
             return PersonFile.FullFilePath().LoadFile().ConverttoPersonModel();
+        }
+
+        public List<TeamModel> GetTeam_All()
+        {
+            return TeamFile.FullFilePath().LoadFile().ConverttoTeamModel(PersonFile);
         }
     }
 }
