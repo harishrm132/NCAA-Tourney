@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackerLibrary", "TrackerLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackerUI", "TrackerUI\TrackerUI.csproj", "{F1C74998-13E6-416B-BBAE-9F3DFAC676D2}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TrackerData", "C:\Users\haris\Documents\GitHub\TournamentTracker\TrackerData\TrackerData.sqlproj", "{7B36DBBF-2639-4D62-B9C3-00B5C7877D0C}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TrackerData", "TrackerData\TrackerData.sqlproj", "{7B36DBBF-2639-4D62-B9C3-00B5C7877D0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
