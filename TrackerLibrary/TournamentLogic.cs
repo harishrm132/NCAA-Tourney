@@ -23,7 +23,7 @@ namespace TrackerLibrary
             CreateOtherRounds(model, rounds);
         }
 
-        private static Void CreateOtherRounds(TournamentModel model, int rounds)
+        private static void CreateOtherRounds(TournamentModel model, int rounds)
         {
             int cRound = 2;
             // First round matchups
