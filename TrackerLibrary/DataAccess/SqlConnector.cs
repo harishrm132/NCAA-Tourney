@@ -78,7 +78,6 @@ namespace TrackerLibrary.DataAccess
                     p.Add("@PersonId", tm.Id);
 
                     connection.Execute("dbo.spTeamMembers_Insert", p, commandType: CommandType.StoredProcedure);
-                    model.Id = p.Get<int>("@Id");
                 }
 
                 return model;
@@ -100,7 +99,7 @@ namespace TrackerLibrary.DataAccess
         private void SaveTournaments(TournamentModel model, IDbConnection connection)
         {
             var p = new DynamicParameters();
-            p.Add("@TounamentName", model.TournamentName);
+            p.Add("@TournamentName", model.TournamentName);
             p.Add("@EntryFee", model.EntryFee);
             p.Add("@Id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
 

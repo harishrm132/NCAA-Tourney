@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[spTeamMembers_Insert]
 	@TeamId int,
 	@PersonId int,
-	@id int = 0 output
+	@Id int = 0 output
 AS
 BEGIN
 	SET NOCOUNT ON;
