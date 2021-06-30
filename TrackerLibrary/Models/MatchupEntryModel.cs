@@ -16,12 +16,12 @@ namespace TrackerLibrary.Models
         /// <summary>
         /// The ID from Database to lookup/identify the team
         /// </summary>
-        public int TeamCompetetingId { get; set; }      
+        public int TeamCompetingId { get; set; }      
         
         /// <summary>
         /// Represent One Team in the matchup.
         /// </summary>
-        public TeamModel TeamCompeteting { get; set; }
+        public TeamModel TeamCompeting { get; set; }
 
         /// <summary>
         /// Reprensent Score for this particular team.

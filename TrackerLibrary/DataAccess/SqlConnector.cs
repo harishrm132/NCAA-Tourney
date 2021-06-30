@@ -163,10 +163,10 @@ namespace TrackerLibrary.DataAccess
                             p.Add("@ParentMatchupId", null);
                         else
                             p.Add("@ParentMatchupId", entry.ParentMatchup.Id);
-                        if (entry.TeamCompeteting == null)
+                        if (entry.TeamCompeting == null)
                             p.Add("@TeamCompetingId", null);
                         else
-                            p.Add("@TeamCompetingId", entry.TeamCompeteting.Id);
+                            p.Add("@TeamCompetingId", entry.TeamCompeting.Id);
                         p.Add("@Id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
                         
                         connection.Execute("dbo.spMatchupEntries_Insert", p, commandType: CommandType.StoredProcedure);
@@ -246,9 +246,9 @@ namespace TrackerLibrary.DataAccess
                         }
                         foreach (MatchupEntryModel me in m.Entries)
                         {
-                            if (me.TeamCompetetingId > 0)
+                            if (me.TeamCompetingId > 0)
                             {
-                                me.TeamCompeteting = allTeams.Where(x => x.Id == me.TeamCompetetingId).First();
+                                me.TeamCompeting = allTeams.Where(x => x.Id == me.TeamCompetingId).First();
                             } 
 
                             if (me.ParentMatchupId > 0)
