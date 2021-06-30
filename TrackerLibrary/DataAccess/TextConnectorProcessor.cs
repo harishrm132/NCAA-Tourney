@@ -214,11 +214,11 @@ namespace TrackerLibrary.DataAccess.TextHelpers
                 me.Id = int.Parse(cols[0]);
                 if(cols[1].Length  == 0)
                 {
-                    me.TeamCompeteting = null;
+                    me.TeamCompeting = null;
                 }
                 else
                 {
-                    me.TeamCompeteting = LookUpTeambyId(int.Parse(cols[1]));
+                    me.TeamCompeting = LookUpTeambyId(int.Parse(cols[1]));
                 }
                 me.Score = Double.Parse(cols[2]);
 
@@ -382,9 +382,9 @@ namespace TrackerLibrary.DataAccess.TextHelpers
                     parent = e.ParentMatchup.Id.ToString();
                 }
                 string teamCompeteing = "";
-                if(e.TeamCompeteting != null)
+                if(e.TeamCompeting != null)
                 {
-                    teamCompeteing = e.TeamCompeteting.Id.ToString();
+                    teamCompeteing = e.TeamCompeting.Id.ToString();
                 }
                 lines.Add($@"{e.Id},{teamCompeteing},{e.Score},{parent}");
             }
