@@ -101,6 +101,7 @@ namespace TrackerUI
             this.UnplayedOnlycheckBox.TabIndex = 4;
             this.UnplayedOnlycheckBox.Text = "Unplayed Only";
             this.UnplayedOnlycheckBox.UseVisualStyleBackColor = true;
+            this.UnplayedOnlycheckBox.CheckedChanged += new System.EventHandler(this.UnplayedOnlycheckBox_CheckedChanged);
             // 
             // MatchupListBox
             // 

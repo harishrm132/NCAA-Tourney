@@ -362,6 +362,41 @@ namespace TrackerLibrary.DataAccess.TextHelpers
             File.WriteAllLines(GlobalConfig.MatchupFile.FullFilePath(), lines);
         }
         
+        public static void UpdateMatchuptoFile(this MatchupModel model)
+        {
+            List<MatchupModel> matchups = GlobalConfig.MatchupFile.FullFilePath().LoadFile().
+                ConverttoMatchupModel();
+
+            MatchupModel oldMatchup = new MatchupModel();
+            foreach (MatchupModel m in matchups)
+            {
+                if (m.Id == model.Id)
+                {
+                    oldMatchup = m;
+                }
+            }
+            matchups.Remove(oldMatchup);
+            matchups.Add(model);
+            
+            foreach (MatchupEntryModel entry in model.Entries)
+            {
+                entry.UpdateEntrytoFile();
+            }
+            
+            //save to file
+            List<string> lines = new List<string>();
+            foreach (MatchupModel m in matchups)
+            {
+                string winner = "";
+                if (m.Winner != null)
+                {
+                    winner = m.Winner.Id.ToString();
+                }
+                lines.Add($@"{m.Id},{ConvertMatchupEntryListtostring(m.Entries)},{winner},{m.MatchupRound}");
+            }
+            File.WriteAllLines(GlobalConfig.MatchupFile.FullFilePath(), lines);
+        }
+        
         public static void SaveEntrytoFile(this MatchupEntryModel model, string MatchupEntryFile)
         {
             List<MatchupEntryModel> entries = GlobalConfig.MatchupEntryFile.FullFilePath().LoadFile().
@@ -370,6 +405,40 @@ namespace TrackerLibrary.DataAccess.TextHelpers
             int currentId = 1;
             if (entries.Count > 0) { currentId = entries.OrderByDescending(x => x.Id).First().Id + 1; }
             model.Id = currentId;
+            entries.Add(model);
+            
+            //save to file
+            List<string> lines = new List<string>();
+            foreach (MatchupEntryModel e in entries)
+            {
+                string parent = "";
+                if (e.ParentMatchup != null)
+                {
+                    parent = e.ParentMatchup.Id.ToString();
+                }
+                string teamCompeteing = "";
+                if(e.TeamCompeting != null)
+                {
+                    teamCompeteing = e.TeamCompeting.Id.ToString();
+                }
+                lines.Add($@"{e.Id},{teamCompeteing},{e.Score},{parent}");
+            }
+            File.WriteAllLines(GlobalConfig.MatchupEntryFile.FullFilePath(), lines);
+        }
+        
+        public static void UpdateEntrytoFile(this MatchupEntryModel model)
+        {
+            List<MatchupEntryModel> entries = GlobalConfig.MatchupEntryFile.FullFilePath().LoadFile().
+                ConverttoMatchupEntryModel();
+            MatchupEntryModel oldEntries = new MatchupEntryModel();
+            foreach (MatchupEntryModel e in entries)
+            {
+                if (e.Id == model.Id)
+                {
+                    oldEntries = e;
+                }
+            }
+            entries.Remove(oldEntries);
             entries.Add(model);
             
             //save to file

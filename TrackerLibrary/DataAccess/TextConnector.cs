@@ -93,6 +93,11 @@ namespace TrackerLibrary.DataAccess
             //return model;
         }
 
+        public void UpdateMatchup(MatchupModel model)
+        {
+            model.UpdateMatchuptoFile();
+        }
+
         public List<PersonModel> GetPerson_All()
         {
             return PersonFile.FullFilePath().LoadFile().ConverttoPersonModel();
