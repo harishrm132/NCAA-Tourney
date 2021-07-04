@@ -77,7 +77,7 @@ namespace TrackerLibrary.DataAccess
             //Convert prizes to list<string> and Save list of string to text file
             tournaments.SavetoTournamentsFile();
 
-            //return model;
+            TournamentLogic.UpdateTournamentResults(model);
         }
 
         public void UpdateMatchup(MatchupModel model)

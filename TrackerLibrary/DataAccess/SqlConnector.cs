@@ -86,6 +86,7 @@ namespace TrackerLibrary.DataAccess
                 SaveTournamentsPrices(model, connection);
                 SaveTournamentsEntries(model, connection);
                 SaveTournamentsRounds(model, connection);
+                TournamentLogic.UpdateTournamentResults(model);
             }
         }
 

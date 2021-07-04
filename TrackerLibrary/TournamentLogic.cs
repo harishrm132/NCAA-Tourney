@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Configuration;
 using TrackerLibrary.Models;
 
 namespace TrackerLibrary
 {
     public static class TournamentLogic
     {
-        
-
         public static void CreateRounds(TournamentModel model)
         {
             // Order our list randomly of teams
@@ -23,6 +22,99 @@ namespace TrackerLibrary
             CreateOtherRounds(model, rounds);
         }
 
+        public static void UpdateTournamentResults(TournamentModel model)
+        {
+            List<MatchupModel> toScore = new List<MatchupModel>();
+            foreach (List<MatchupModel> round in model.Rounds)
+            {
+                foreach (MatchupModel rm in round)
+                {
+                    //For Bye Round matchup
+                    if (rm.Winner == null && rm.Entries.Any(x => x.Score != 0) || rm.Entries.Count == 1)
+                    {
+                        toScore.Add(rm);
+                    }
+                }
+            }
+
+            MarkWinnerinMatchups(toScore);
+            AdvanceWinners(toScore, model);
+
+            //Update Matchup to database
+            toScore.ForEach(x => GlobalConfig.Connection.UpdateMatchup(x));
+            
+        }
+
+        private static void MarkWinnerinMatchups(List<MatchupModel> models)
+        {
+            string greaterWins = ConfigurationManager.AppSettings.Get("greaterWins");
+            foreach (MatchupModel m in models)
+            {
+                // For Bye week entry
+                if (m.Entries.Count == 1)
+                {
+                    m.Winner = m.Entries[0].TeamCompeting; continue; 
+                }
+                //greater wins - 1 or lesser wins - 0
+                if (greaterWins == "0")
+                {
+                    if (m.Entries[0].Score < m.Entries[1].Score)
+                    {
+                        m.Winner = m.Entries[0].TeamCompeting;
+                    }
+                    else if(m.Entries[1].Score < m.Entries[0].Score)
+                    {
+                        m.Winner = m.Entries[1].TeamCompeting;
+                    }
+                    else
+                    {
+                        throw new Exception("We dont allow ties in application");
+                    }
+                }
+                else
+                {
+                    if (m.Entries[0].Score > m.Entries[1].Score)
+                    {
+                        m.Winner = m.Entries[0].TeamCompeting;
+                    }
+                    else if(m.Entries[1].Score > m.Entries[0].Score)
+                    {
+                        m.Winner = m.Entries[1].TeamCompeting;
+                    }
+                    else
+                    {
+                        throw new Exception("We dont allow ties in application");
+                    }
+                }
+            }
+        }
+
+        private static void AdvanceWinners(List<MatchupModel> models, TournamentModel tournaments)
+        {
+            foreach (MatchupModel m in models)
+            {
+                foreach (List<MatchupModel> round in tournaments.Rounds)
+                {
+                    foreach (MatchupModel rm in round)
+                    {
+                        foreach (MatchupEntryModel me in rm.Entries)
+                        {
+                            if (me.ParentMatchup != null)
+                            {
+                                if (me.ParentMatchup.Id == m.Id)
+                                { 
+                                    //For Updating Parent Id
+                                    me.TeamCompeting = m.Winner;
+                                    GlobalConfig.Connection.UpdateMatchup(rm);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+        
         private static void CreateOtherRounds(TournamentModel model, int rounds)
         {
             int cRound = 2;

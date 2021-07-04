@@ -158,7 +158,6 @@ namespace TrackerUI
             
             for (int i = 0; i < m.Entries.Count; i++)
             {
-                // TODO - Refactor this single method
                 if (i == 0)
                 {
                     if (m.Entries[0].TeamCompeting != null)
@@ -176,42 +175,9 @@ namespace TrackerUI
                     }
                 }
             }
-
-            if (teamOnescore > teamTwoscore)
-            {
-                //Team One Wins
-                m.Winner = m.Entries[0].TeamCompeting;
-            }
-            else if(teamTwoscore > teamOnescore)
-            {
-                m.Winner = m.Entries[1].TeamCompeting;
-            }
-            else
-            {
-                MessageBox.Show("I dont handle tie games");
-            }
-
-            foreach (List<MatchupModel> round in tournament.Rounds)
-            {
-                foreach (MatchupModel rm in round)
-                {
-                    foreach (MatchupEntryModel me in rm.Entries)
-                    {
-                        if (me.ParentMatchup != null)
-                        {
-                            if (me.ParentMatchup.Id == m.Id)
-                            { 
-                                //For Updating Parent Id
-                                me.TeamCompeting = m.Winner;
-                                GlobalConfig.Connection.UpdateMatchup(rm);
-                            }
-                        }
-                    }
-                }
-            }
-            LoadMatchups((int) RoundDropDown.SelectedItem); 
             //Update Matchup to database
-            GlobalConfig.Connection.UpdateMatchup(m);
+            TournamentLogic.UpdateTournamentResults(tournament);
+            LoadMatchups((int) RoundDropDown.SelectedItem); 
         }
 
         private bool ValidateScore()
