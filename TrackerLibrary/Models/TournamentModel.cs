@@ -8,6 +8,8 @@ namespace TrackerLibrary.Models
 {
     public class TournamentModel
     {
+        public event EventHandler<DateTime> OnTournamentComplete;
+        
         /// <summary>
         /// The unique Indentifier for prize
         /// </summary>
@@ -37,5 +39,11 @@ namespace TrackerLibrary.Models
         /// Represents list of rounds in which the tournament is countucted
         /// </summary>
         public List<List<MatchupModel>> Rounds { get; set; } = new List<List<MatchupModel>>();
+
+        public void CompleteTournament()
+        {
+            // If its available do it
+            OnTournamentComplete?.Invoke(this, DateTime.Now);
+        }
     }
 }

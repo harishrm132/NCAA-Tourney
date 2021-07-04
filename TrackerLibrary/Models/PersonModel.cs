@@ -26,7 +26,7 @@ namespace TrackerLibrary.Models
         /// <summary>
         /// Represents email adress of person
         /// </summary>
-        public string EmailAdress { get; set; }
+        public string EmailAddress { get; set; }
 
         /// <summary>
         /// Represents phonenumber of person

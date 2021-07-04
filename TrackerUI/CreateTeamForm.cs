@@ -54,7 +54,7 @@ namespace TrackerUI
                 PersonModel p = new PersonModel();
                 p.FirstName = FirstNameValue.Text;
                 p.LastName = LastNameValue.Text;
-                p.EmailAdress = EmailValue.Text;
+                p.EmailAddress = EmailValue.Text;
                 p.CellphoneNumber = PhoneNoValue.Text;
 
                 GlobalConfig.Connection.CreatePerson(p);

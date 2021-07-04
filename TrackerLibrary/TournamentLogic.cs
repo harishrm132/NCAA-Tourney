@@ -72,7 +72,7 @@ namespace TrackerLibrary
 
         private static void AlertPersontoRounds(PersonModel p, string teamName, MatchupEntryModel competitor)
         {
-            if (p.EmailAdress.Length == 0) { return; }
+            if (p.EmailAddress.Length == 0) { return; }
             string to = "";
             string subject = "";
             StringBuilder body = new StringBuilder();
@@ -95,7 +95,7 @@ namespace TrackerLibrary
                 body.AppendLine("~ Tournament Tracker");
             }
             
-            to = p.EmailAdress;
+            to = p.EmailAddress;
             
             EmailLogic.SendEmail(to, subject, body.ToString());
         }
@@ -107,15 +107,74 @@ namespace TrackerLibrary
 
             foreach (List<MatchupModel> round in model.Rounds)
             {
-                if (round.All(x => x.Winner != null))
-                {
-                    output += 1;
-                }
+                if (round.All(x => x.Winner != null)) { output += 1; }
+                else { return output; }
             }
 
+            //Tournament is complete
+            CompleteTournament(model);
+            return output - 1;
+        }
+
+        private static void CompleteTournament(TournamentModel model)
+        {
+            //Push data using connector
+            GlobalConfig.Connection.CompleteTournaments(model);
+            TeamModel Winners = model.Rounds.Last().First().Winner;
+            TeamModel RunnerUp = model.Rounds.Last().First().Entries.Where(x => x.TeamCompeting != Winners).First().TeamCompeting;
+            decimal winnerPrize = 0;
+            decimal runnerupPrize = 0;
+            
+            if (model.Prices.Count > 0)
+            {
+                decimal totalIncome = model.EnteredTeams.Count * model.EntryFee;
+                PriceModel price1st = model.Prices.Where(x => x.PlaceNumber == 1).FirstOrDefault();
+                PriceModel price2nd = model.Prices.Where(x => x.PlaceNumber == 2).FirstOrDefault();
+                if (price1st != null) { winnerPrize = price1st.CalculatePricePayout(totalIncome); }
+                if (price2nd != null) { runnerupPrize = price2nd.CalculatePricePayout(totalIncome); }
+            }
+            
+            //Send Email to all tournament
+            string subject = $"In {model.TournamentName}, {Winners.TeamName} has won";
+            StringBuilder body = new StringBuilder();
+            body.AppendLine("<h1>You have a new WINNER!</h1>");
+            body.AppendLine("<p>Congrats to winner on a great tournamnets.</p>");
+            body.AppendLine("<br/>");
+            if (winnerPrize > 0)
+            {
+                body.AppendLine($"<p>{Winners.TeamName} will receive ${winnerPrize}.</p>");
+            }
+            if (runnerupPrize > 0)
+            {
+                body.AppendLine($"<p>{RunnerUp.TeamName} will receive ${runnerupPrize}.</p>");
+            }
+            body.AppendLine("<p>Thanks for great tournament</p>");
+            body.AppendLine("~ Tournament Tracker");
+
+            List<string> bcc = new List<string>();
+            foreach (TeamModel t in model.EnteredTeams)
+            {
+                foreach (PersonModel p in t.TeamMembers)
+                {
+                    if (p.EmailAddress.Length > 0)
+                    {
+                        bcc.Add(p.EmailAddress);
+                    }
+                }
+            }
+            EmailLogic.SendEmail(new List<string>(), bcc, subject, body.ToString());
+            
+            //Complete
+            model.CompleteTournament();
+        }
+
+        private static decimal CalculatePricePayout(this PriceModel p, decimal income)
+        {
+            decimal output = 0;
+            if (p.PriceAmount > 0) { output = p.PriceAmount; }
+            else { output = decimal.Multiply(income, Convert.ToDecimal(p.PricePercentage / 100)); }
             return output;
         }
-        
         private static void MarkWinnerinMatchups(List<MatchupModel> models)
         {
             string greaterWins = ConfigurationManager.AppSettings.Get("greaterWins");

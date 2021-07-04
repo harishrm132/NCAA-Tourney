@@ -22,9 +22,15 @@ namespace TrackerUI
         {
             InitializeComponent(); 
             tournament = tournamentModel;
+            tournament.OnTournamentComplete += Tournament_OnTournamentComplete;
             LoadFormData();
             LoadRounds();
             WireupLists();
+        }
+
+        private void Tournament_OnTournamentComplete(object sender, DateTime e)
+        {
+            this.Close();
         }
 
         private void LoadFormData()
@@ -110,7 +116,6 @@ namespace TrackerUI
         {
             for (int i = 0; i < m.Entries.Count; i++)
             {
-                // TODO - Refactor this single method
                 if (i == 0)
                 {
                     if (m.Entries[0].TeamCompeting != null)

@@ -24,7 +24,7 @@ namespace TrackerLibrary.DataAccess
                 var p = new DynamicParameters();
                 p.Add("@FirstName", model.FirstName);
                 p.Add("@LastName", model.LastName);
-                p.Add("@EmailAddress", model.EmailAdress);
+                p.Add("@EmailAddress", model.EmailAddress);
                 p.Add("@CellphoneNumber", model.CellphoneNumber);
                 p.Add("@Id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
 
@@ -114,6 +114,18 @@ namespace TrackerLibrary.DataAccess
                     }
                 }
             }
+        }
+
+        public void CompleteTournaments(TournamentModel model)
+        {
+            //spTournaments_Complete Id
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(db)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Id", model.Id);
+                connection.Execute("dbo.spTournaments_Complete", p, commandType: CommandType.StoredProcedure);
+            }
+            
         }
 
         private void SaveTournaments(TournamentModel model, IDbConnection connection)
