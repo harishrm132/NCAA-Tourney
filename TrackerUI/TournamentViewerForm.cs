@@ -149,8 +149,8 @@ namespace TrackerUI
         
         private void Scorebutton_Click(object sender, EventArgs e)
         {
-            if(ValidateScore())
-            {  MessageBox.Show("Please Enter a valid Score"); return; }
+            if(!ValidateScore(out string msg))
+            { MessageBox.Show($"Input Error: {msg}"); return; }
             
             MatchupModel m = (MatchupModel) MatchupListBox.SelectedItem;
             double teamOnescore = 0;
@@ -176,19 +176,44 @@ namespace TrackerUI
                 }
             }
             //Update Matchup to database
-            TournamentLogic.UpdateTournamentResults(tournament);
+            try
+            {
+                TournamentLogic.UpdateTournamentResults(tournament);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"The Application has following error:\n {ex.Message}", "Error");
+                return; 
+            }
             LoadMatchups((int) RoundDropDown.SelectedItem); 
         }
 
-        private bool ValidateScore()
+        private bool ValidateScore(out string msg)
         {
             bool ScoreValid1 = double.TryParse(TeamOneScoreValue.Text, out double Scoreval1);
             bool ScoreValid2 = double.TryParse(TeamTwoScoreValue.Text, out double Scoreval2);
-            if (ScoreValid1 || ScoreValid2)
+            if (!ScoreValid1)
             {
+                msg = "Score 1 is not valid";
+                return false;
+            }
+            if (!ScoreValid2)
+            {
+                msg = "Score 2 is not valid";
+                return false;
+            }
+            if (Scoreval1 == 0 && Scoreval2 == 0)
+            {
+                msg = "You didnt enter score for both teams";
+                return false;
+            }
+            if (Scoreval1 == Scoreval2)
+            {
+                msg = "Score for both teams need to be different";
                 return false;
             }
 
+            msg = "";
             return true;
         }
     }
