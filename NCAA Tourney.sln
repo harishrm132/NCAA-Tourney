@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackerUI", "TrackerUI\Trac
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TrackerData", "TrackerData\TrackerData.sqlproj", "{7B36DBBF-2639-4D62-B9C3-00B5C7877D0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NCAA UI", "NCAA UI\NCAA UI.csproj", "{EC311562-81EE-4273-8718-073E505205E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{7B36DBBF-2639-4D62-B9C3-00B5C7877D0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B36DBBF-2639-4D62-B9C3-00B5C7877D0C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7B36DBBF-2639-4D62-B9C3-00B5C7877D0C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{EC311562-81EE-4273-8718-073E505205E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC311562-81EE-4273-8718-073E505205E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC311562-81EE-4273-8718-073E505205E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC311562-81EE-4273-8718-073E505205E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -53,3 +53,4 @@ TrackerLibrary/obj/Debug
 *.cache
 TrackerLibrary/obj/Debug/TrackerLibrary.csprojAssemblyReference.cache
 TrackerLibrary/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/packages
