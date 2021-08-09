@@ -17,6 +17,8 @@ namespace NCAA_UI.ViewModels
             GlobalConfig.InitializeConnection(DatabaseType.SQL);
 
             _existingTournaments = new BindableCollection<TournamentModel>(GlobalConfig.Connection.GetTournaments_All());
+
+            ActivateItem(new CreatePrizeFormViewModel());   
         }
 
         public void CreateTournament()

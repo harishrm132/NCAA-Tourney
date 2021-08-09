@@ -16,16 +16,6 @@ namespace NCAA_UI.ViewModels
         private decimal _prizeAmount;
         private double _prizePercentage;
 
-        public int PlaceNumber
-        {
-            get { return _placeNumber; }
-            set 
-            { 
-                _placeNumber = value;
-                NotifyOfPropertyChange(() => PlaceNumber);
-            }
-        }
-
         public string PlaceName
         {
             get { return _placeName; }
@@ -60,7 +50,7 @@ namespace NCAA_UI.ViewModels
         {
             return ValidateForm(placeNumber, placeName, prizeAmount, prizePercentage);
         }
-        
+
         public void CreatePrize(int placeNumber, string placeName, decimal prizeAmount, double prizePercentage)
         {
             PriceModel model = new PriceModel
@@ -82,7 +72,7 @@ namespace NCAA_UI.ViewModels
 
             if (placeNumber < 1) { output = false; }
 
-            if (PlaceName.Length == 0) { output = false; }
+            if (placeName.Length == 0) { output = false; }
  
             if (prizeAmount <= 0 && (prizePercentage <= 0 || prizePercentage > 100)) { output = false; }
 
