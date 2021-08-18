@@ -54,3 +54,5 @@ TrackerLibrary/obj/Debug
 TrackerLibrary/obj/Debug/TrackerLibrary.csprojAssemblyReference.cache
 TrackerLibrary/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 /packages
+*.dbmdl
+TrackerData/TrackerData.dbmdl
