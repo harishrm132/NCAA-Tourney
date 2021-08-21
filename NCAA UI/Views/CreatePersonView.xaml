@@ -40,10 +40,15 @@
                 <TextBox x:Name="CellPhone" Margin="0,0,5,10" Grid.Row="3" Grid.Column="1"/>
 
                 <!--Row 4-->
-                <Button x:Name="CreatePerson" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Padding="10" Margin="5,0" >Create Person
-                </Button>
+                <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,0" HorizontalAlignment="Center">
+                    <Button x:Name="CreatePerson" Padding="10" Background="LightGreen" Margin="0 0 5 0">Create Person
+                    </Button>
+                    <Button x:Name="CancelCreation" Padding="10" Background="red" Foreground="White" Margin="5 0 0 0">Cancel Person
+                    </Button>
+                    
+                </StackPanel>
             </Grid>
         </StackPanel>
 
-    </Grid>
+    </Grid> 
 </UserControl>

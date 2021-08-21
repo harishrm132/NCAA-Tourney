@@ -19,10 +19,15 @@
                 <Button x:Name="CreateMember" Padding="5">Create Member</Button>
                 <Button x:Name="RemoveMember" Padding="5" Margin="5 0 0 0">Remove Member</Button>
             </StackPanel>
-            <TextBlock Margin="5 10 5 10">Selected Team Members</TextBlock>
-            <ListBox x:Name="SelectedTeamMembers" 
+            <StackPanel x:Name="SelectedTeamMembersIsVisible" Orientation="Vertical" Margin="5 10 5 0">
+                <TextBlock Margin="0 0 0 10">Selected Team Members</TextBlock>
+                <ListBox x:Name="SelectedTeamMembers" 
                      SelectedItem="{Binding Path=SelectedTeamMemberToRemove, Mode=TwoWay}"
-                     DisplayMemberPath="FullName" Margin="5 0 5 0" MinHeight="20"/>
+                     DisplayMemberPath="FullName" MinHeight="20"/>
+            </StackPanel>
+            <StackPanel x:Name="AddPersonIsVisible" Orientation="Vertical" Margin="5 10 5 0">
+                <ContentControl x:Name="ActiveItem"/>
+            </StackPanel>
             <Button x:Name="CreateTeam" Margin="5 10 5 5" Padding="3">Create Team</Button>
         </StackPanel>
     </Grid>

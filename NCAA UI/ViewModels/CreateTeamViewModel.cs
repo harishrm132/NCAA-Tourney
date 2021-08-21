@@ -9,17 +9,20 @@ using TrackerLibrary.Models;
 
 namespace NCAA_UI.ViewModels
 {
-    public class CreateTeamViewModel : Conductor<object>
+    public class CreateTeamViewModel : Conductor<object>, IHandle<PersonModel>
     {
         private string _teamName = "";
         private BindableCollection<PersonModel> _avaliableTeamMembers;
         private PersonModel _selectedTeamMemberToAdd;
         private BindableCollection<PersonModel> _selectedTeamMembers = new BindableCollection<PersonModel>();
         private PersonModel _selectedTeamMemberToRemove;
+        private bool _selectedTeamMembersIsVisible = true;
+        private bool _addPersonIsVisible = false;
 
         public CreateTeamViewModel()
         {
             AvaliableTeamMembers = new BindableCollection<PersonModel>(GlobalConfig.Connection.GetPerson_All());
+            EventAggregationProvider.TrackerEventAggregator.Subscribe(this);
         }
 
         public string TeamName
@@ -30,6 +33,28 @@ namespace NCAA_UI.ViewModels
                 _teamName = value;
                 NotifyOfPropertyChange(() => TeamName);
                 NotifyOfPropertyChange(() => CanCreateTeam);
+            }
+        }
+
+
+        public bool SelectedTeamMembersIsVisible
+        {
+            get { return _selectedTeamMembersIsVisible; }
+            set 
+            { 
+                _selectedTeamMembersIsVisible = value;
+                NotifyOfPropertyChange(() => SelectedTeamMembersIsVisible);
+            }
+        }
+
+
+        public bool AddPersonIsVisible
+        {
+            get { return _addPersonIsVisible; }
+            set 
+            { 
+                _addPersonIsVisible = value;
+                NotifyOfPropertyChange(() => AddPersonIsVisible);
             }
         }
 
@@ -91,7 +116,9 @@ namespace NCAA_UI.ViewModels
         
         public void CreateMember()
         {
-
+            ActivateItem(new CreatePersonViewModel());
+            SelectedTeamMembersIsVisible = false;
+            AddPersonIsVisible = true;
         }
         
         public bool CanRemoveMember
@@ -131,6 +158,17 @@ namespace NCAA_UI.ViewModels
             GlobalConfig.Connection.CreateTeam(t);
 
             //TODO - Pass Team Back to parent and close the form
+        }
+
+        public void Handle(PersonModel message)
+        {
+            if (!string.IsNullOrWhiteSpace(message.FullName))
+            {
+                SelectedTeamMembers.Add(message);
+                NotifyOfPropertyChange(() => CanCreateTeam);
+            }
+            SelectedTeamMembersIsVisible = true;
+            AddPersonIsVisible = false;
         }
     }
 }

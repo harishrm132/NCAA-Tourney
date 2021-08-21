@@ -56,6 +56,12 @@ namespace NCAA_UI.ViewModels
             }
         }
 
+        public void CancelCreation()
+        {
+            EventAggregationProvider.TrackerEventAggregator.PublishOnUIThread(new PersonModel());
+            this.TryClose();
+        }
+
         public bool CanCreatePerson(string firstName, string lastName, string email, string cellphone)
         {
             if(firstName.Length > 0 && lastName.Length > 0 && email.Length > 0 && cellphone.Length > 0)
@@ -78,7 +84,8 @@ namespace NCAA_UI.ViewModels
 
             GlobalConfig.Connection.CreatePerson(p);
 
-            //TODO - Send result back to parents
+            EventAggregationProvider.TrackerEventAggregator.PublishOnUIThread(p);
+            this.TryClose();
         }
 
     }
