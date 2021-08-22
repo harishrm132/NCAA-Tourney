@@ -24,13 +24,23 @@ namespace NCAA_UI.ViewModels
             ActivateItem(new CreateTournamentViewModel());
         }
 
+        public void LoadTournament()
+        {
+            if (SelectedTournament != null && !string.IsNullOrWhiteSpace(SelectedTournament.TournamentName))
+            {
+                ActivateItem(new TournamentViewerViewModel(SelectedTournament));
+            }
+        }
+
         public void Handle(TournamentModel message)
         {
             //TODO - open the tournament viewer
-            throw new NotImplementedException();
+            ExistingTournaments.Add(message);
+            SelectedTournament = message;
         }
 
         private BindableCollection<TournamentModel> _existingTournaments;
+        private TournamentModel _selectedTournament;
 
         public BindableCollection<TournamentModel> ExistingTournaments
         {
@@ -38,14 +48,13 @@ namespace NCAA_UI.ViewModels
             set { _existingTournaments = value; }
         }
 
-        private TournamentModel _selectedTournament;
-
         public TournamentModel SelectedTournament
         {
             get { return _selectedTournament; }
             set { 
                 _selectedTournament = value;
                 NotifyOfPropertyChange(() => SelectedTournament);
+                LoadTournament();
             }
         }
 

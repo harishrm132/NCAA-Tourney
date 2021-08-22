@@ -162,7 +162,7 @@ namespace TrackerLibrary
                     }
                 }
             }
-            EmailLogic.SendEmail(new List<string>(), bcc, subject, body.ToString());
+            //EmailLogic.SendEmail(new List<string>(), bcc, subject, body.ToString());
             
             //Complete
             model.CompleteTournament();
