@@ -9,7 +9,7 @@ using TrackerLibrary.Models;
 
 namespace NCAA_UI.ViewModels
 {
-    public class ShellViewModel : Conductor<object>
+    public class ShellViewModel : Conductor<object>, IHandle<TournamentModel>
     {
         public ShellViewModel()
         {
@@ -17,12 +17,17 @@ namespace NCAA_UI.ViewModels
             GlobalConfig.InitializeConnection(DatabaseType.SQL);
 
             _existingTournaments = new BindableCollection<TournamentModel>(GlobalConfig.Connection.GetTournaments_All());
-
-            ActivateItem(new CreatePrizeFormViewModel());   
         }
 
         public void CreateTournament()
         {
+            ActivateItem(new CreateTournamentViewModel());
+        }
+
+        public void Handle(TournamentModel message)
+        {
+            //TODO - open the tournament viewer
+            throw new NotImplementedException();
         }
 
         private BindableCollection<TournamentModel> _existingTournaments;

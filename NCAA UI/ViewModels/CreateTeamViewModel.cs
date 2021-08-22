@@ -136,6 +136,12 @@ namespace NCAA_UI.ViewModels
             NotifyOfPropertyChange(() => CanCreateTeam);
         }
 
+        public void CancelCreation()
+        {
+            EventAggregationProvider.TrackerEventAggregator.PublishOnUIThread(new TeamModel());
+            this.TryClose();
+        }
+
         public bool CanCreateTeam
         {
             get
@@ -157,7 +163,8 @@ namespace NCAA_UI.ViewModels
             t.TeamMembers = SelectedTeamMembers.ToList();
             GlobalConfig.Connection.CreateTeam(t);
 
-            //TODO - Pass Team Back to parent and close the form
+            EventAggregationProvider.TrackerEventAggregator.PublishOnUIThread(t);
+            this.TryClose();
         }
 
         public void Handle(PersonModel message)

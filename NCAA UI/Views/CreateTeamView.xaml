@@ -28,7 +28,10 @@
             <StackPanel x:Name="AddPersonIsVisible" Orientation="Vertical" Margin="5 10 5 0">
                 <ContentControl x:Name="ActiveItem"/>
             </StackPanel>
-            <Button x:Name="CreateTeam" Margin="5 10 5 5" Padding="3">Create Team</Button>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5 10 5 5" >
+                <Button x:Name="CreateTeam" Margin="0 0 5 0" Padding="5" Background="LightGreen">Create Team</Button>
+                <Button x:Name="CancelCreation" Margin="5 0 0 0" Padding="5" Background="Red" Foreground="White">Cancel Team</Button>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

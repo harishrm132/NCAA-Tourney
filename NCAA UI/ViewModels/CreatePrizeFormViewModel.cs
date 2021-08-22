@@ -46,6 +46,12 @@ namespace NCAA_UI.ViewModels
             }
         }
 
+        public void CancelCreation()
+        {
+            EventAggregationProvider.TrackerEventAggregator.PublishOnUIThread(new PriceModel());
+            this.TryClose();
+        }
+
         public bool CanCreatePrize(int placeNumber, string placeName, decimal prizeAmount, double prizePercentage)
         {
             return ValidateForm(placeNumber, placeName, prizeAmount, prizePercentage);
@@ -61,9 +67,10 @@ namespace NCAA_UI.ViewModels
                 PricePercentage = prizePercentage
             };
 
-            //GlobalConfig.Connection.CreatePrize(model);
+            GlobalConfig.Connection.CreatePrize(model);
 
-            //TODO - Close out forma and alert the calling form
+            EventAggregationProvider.TrackerEventAggregator.PublishOnUIThread(model);
+            this.TryClose();
         }
 
         private bool ValidateForm(int placeNumber, string placeName, decimal prizeAmount, double prizePercentage)
